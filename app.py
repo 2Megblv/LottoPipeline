@@ -4,7 +4,7 @@ import numpy as np
 
 from pipeline import DataPipeline
 from run_aus import set_game_params
-from aus_data import load_from_csv, fetch_all_aus_draws
+from aus_data import load_from_csv, fetch_all_aus_draws, scrape_latest_results
 from numerology_lunar import get_chaldean_number, calculate_moon_phase
 from aus_pool import build_restricted_pool
 from aus_generate_ticket import generate_aus_ticket
@@ -155,6 +155,9 @@ if 'pipeline' not in st.session_state:
 
 def render_game_tab(game_name, game_type):
     st.header(game_name)
+    count_scraped = scrape_latest_results(game_type)
+    if count_scraped > 0:
+        st.success(f"Successfully auto-fetched {count_scraped} recent {game_name} draws from the web!")
 
     uploaded_file = st.file_uploader(f"Upload Historical CSV for {game_name}", type=['csv'], key=f"file_{game_type}")
     if uploaded_file is not None:
