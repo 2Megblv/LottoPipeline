@@ -6,10 +6,9 @@
 *   **Python Version:** Python 3.12 is *strictly* required to ensure compatibility with TensorFlow and Pennylane.
 *   **Database:** SQLite3 installed on your system.
 
-## 2. Environment Setup
+## 2. Environment Setup (Windows & Linux)
 
 1.  **Clone the Repository and Checkout the Branch:**
-    By default, `git clone` copies the entire repository but checks out the default `main` branch. Because these Australian Lotto features were developed on a specific branch, you must clone the repository and then switch to the correct branch.
     ```bash
     git clone https://github.com/2Megblv/LottoPipeline.git
     cd LottoPipeline
@@ -21,22 +20,51 @@
     ```bash
     python3.12 -m pip install -r requirements.txt
     ```
-    *Note: The new web application relies on `streamlit` for the UI, `ephem` for lunar calculations, and `pandas` and `beautifulsoup4` for automated data handling.*
 
-3.  **Initialize the Database:**
-    The SQLite database (`lotto.db`) is automatically initialized to include the Australian tables (`aus_draws`) the first time the ML pipeline is run or data is fetched.
+## 3. Environment Setup (macOS Specific)
 
-## 3. Running the Application
+macOS users often run into "externally-managed-environment" errors when trying to install global pip packages. To run this app successfully on a Mac, you must use a virtual environment.
+
+1.  **Install Homebrew & Python 3.12:**
+    Open Terminal and install Homebrew if you don't have it, then install Python 3.12.
+    ```bash
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    brew install python@3.12
+    ```
+
+2.  **Clone the Repository:**
+    ```bash
+    git clone https://github.com/2Megblv/LottoPipeline.git
+    cd LottoPipeline
+    git checkout aus-lotto-streamlit
+    ```
+
+3.  **Create and Activate a Virtual Environment:**
+    This isolates the dependencies from macOS system protections.
+    ```bash
+    python3.12 -m venv lotto_env
+    source lotto_env/bin/activate
+    ```
+    *(You will know it worked if your terminal prompt now starts with `(lotto_env)`)*
+
+4.  **Install Dependencies:**
+    Now install the libraries inside your active virtual environment.
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+## 4. Running the Application
 
 To launch the local web application dashboard, run the following command from the root of the project:
 
 ```bash
-streamlit run app.py
+python -m streamlit run app.py
 ```
+*(macOS users: Ensure your `lotto_env` is activated before running this command).*
 
 This will automatically open a new tab in your default web browser pointing to `http://localhost:8501`.
 
-## 4. How Data is Ingested
+## 5. How Data is Ingested
 
 ### Primary Method: Automated Web Scraping
 The application is now equipped with an automated web scraper. Whenever you launch the app and click on a game tab (e.g., Saturday Lotto, Oz Lotto, or Powerball), the system will silently reach out to `australia.national-lottery.com` and scrape the latest official draw results. These results are automatically inserted into your local SQLite database, ensuring your machine learning models are always training on the most up-to-date data.
@@ -47,7 +75,7 @@ If the automated scraper fails due to website layout changes or network issues, 
 2. Under the game header in the Streamlit UI, locate the **"Upload Historical CSV"** widget.
 3. Drag and drop your CSV file. The application will parse it and insert any missing draws into the database.
 
-## 5. Generating Tickets & Strategy Selection
+## 6. Generating Tickets & Strategy Selection
 
 Once you have at least 10 historical draws loaded, you can generate tickets.
 
@@ -61,7 +89,7 @@ Once you have at least 10 historical draws loaded, you can generate tickets.
 
 ---
 
-## 6. Strategy FAQ: System Entries vs. Standard Games
+## 7. Strategy FAQ: System Entries vs. Standard Games
 
 **Does Saturday Lotto have a System selection?**
 Yes. In Australia, you can play a "System" entry for Saturday Lotto (which requires 6 winning numbers from 45). The Streamlit app supports **System 8** generation.
