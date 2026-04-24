@@ -8,10 +8,12 @@
 
 ## 2. Environment Setup
 
-1.  **Clone the Repository (or navigate to the directory):**
+1.  **Clone the Repository and Checkout the Branch:**
+    By default, `git clone` copies the entire repository but checks out the default `main` branch. Because these Australian Lotto features were developed on a specific branch, you must clone the repository and then switch to the correct branch.
     ```bash
-    git clone https://gitlab.com/Callam7/LottoPipeline.git
+    git clone https://github.com/2Megblv/LottoPipeline.git
     cd LottoPipeline
+    git checkout aus-lotto-streamlit
     ```
 
 2.  **Install the Required Dependencies:**
