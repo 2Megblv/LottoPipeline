@@ -63,6 +63,16 @@ macOS users often run into "externally-managed-environment" errors when trying t
 
 This will automatically open a new tab in your default web browser pointing to `http://localhost:8501`.
 
+### 🚨 macOS Troubleshooting: "No module named streamlit"
+If you ran the command above and still see `/Users/.../lotto_env/bin/python: No module named streamlit`, it means the installation step failed or was skipped. **Run this exact command to force-install the UI packages directly into your environment:**
+```bash
+./lotto_env/bin/python -m pip install streamlit ephem pandas beautifulsoup4
+```
+Then, try starting the app again:
+```bash
+./lotto_env/bin/python -m streamlit run app.py
+```
+
 ## 4. How Data is Ingested
 
 ### Primary Method: Automated Web Scraping
