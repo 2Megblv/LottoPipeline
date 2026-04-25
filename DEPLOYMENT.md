@@ -21,9 +21,14 @@
     python3.12 -m pip install -r requirements.txt
     ```
 
-## 3. Environment Setup (macOS Specific)
+3.  **Run the Application:**
+    ```bash
+    streamlit run app.py
+    ```
 
-macOS users often run into "externally-managed-environment" errors when trying to install global pip packages. To run this app successfully on a Mac, you must use a virtual environment.
+## 3. Environment Setup (macOS Specific - Bulletproof Method)
+
+macOS users often run into "externally-managed-environment" errors when trying to install global packages, and sometimes virtual environments fail to link `pip` correctly. To run this app successfully on a Mac, follow these explicit path-bound instructions.
 
 1.  **Install Homebrew & Python 3.12:**
     Open Terminal and install Homebrew if you don't have it, then install Python 3.12.
@@ -39,32 +44,26 @@ macOS users often run into "externally-managed-environment" errors when trying t
     cd LottoPipeline
     ```
 
-3.  **Create and Activate a Virtual Environment:**
-    This isolates the dependencies from macOS system protections.
+3.  **Create the Virtual Environment:**
     ```bash
     python3.12 -m venv lotto_env
-    source lotto_env/bin/activate
     ```
-    *(You will know it worked if your terminal prompt now starts with `(lotto_env)`)*
 
-4.  **Install Dependencies (Crucial Step):**
-    You must explicitly use `python -m pip` to guarantee the libraries install *inside* the active `lotto_env`. If you skip this, Streamlit will not be found.
+4.  **Install Dependencies (Using Absolute Paths):**
+    To ensure packages are installed *strictly* into the new environment (and to avoid the "No module named streamlit" error), use the local environment's binary directly:
     ```bash
-    python -m pip install -r requirements.txt
+    ./lotto_env/bin/pip install -r requirements.txt
     ```
 
-## 4. Running the Application
-
-To launch the local web application dashboard, run the following command from the root of the project:
-
-```bash
-python -m streamlit run app.py
-```
-*(macOS users: Ensure your `lotto_env` is activated before running this command).*
+5.  **Running the Application:**
+    Launch the app using the local environment's python binary. You do not even need to run `source activate` if you use this command:
+    ```bash
+    ./lotto_env/bin/python -m streamlit run app.py
+    ```
 
 This will automatically open a new tab in your default web browser pointing to `http://localhost:8501`.
 
-## 5. How Data is Ingested
+## 4. How Data is Ingested
 
 ### Primary Method: Automated Web Scraping
 The application is now equipped with an automated web scraper. Whenever you launch the app and click on a game tab (e.g., Saturday Lotto, Oz Lotto, or Powerball), the system will silently reach out to `australia.national-lottery.com` and scrape the latest official draw results. These results are automatically inserted into your local SQLite database, ensuring your machine learning models are always training on the most up-to-date data.
@@ -75,7 +74,7 @@ If the automated scraper fails due to website layout changes or network issues, 
 2. Under the game header in the Streamlit UI, locate the **"Upload Historical CSV"** widget.
 3. Drag and drop your CSV file. The application will parse it and insert any missing draws into the database.
 
-## 6. Generating Tickets & Strategy Selection
+## 5. Generating Tickets & Strategy Selection
 
 Once you have at least 10 historical draws loaded, you can generate tickets.
 
@@ -89,7 +88,7 @@ Once you have at least 10 historical draws loaded, you can generate tickets.
 
 ---
 
-## 7. Strategy FAQ: System Entries vs. Standard Games
+## 6. Strategy FAQ: System Entries vs. Standard Games
 
 **Does Saturday Lotto have a System selection?**
 Yes. In Australia, you can play a "System" entry for Saturday Lotto (which requires 6 winning numbers from 45). The Streamlit app supports **System 8** generation.
