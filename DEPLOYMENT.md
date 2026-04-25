@@ -8,11 +8,11 @@
 
 ## 2. Environment Setup (Windows & Linux)
 
-1.  **Clone the Repository and Checkout the Branch:**
+1.  **Clone the Repository (or Extract the Downloaded ZIP):**
+    If you downloaded the `lotto_australia_deployment.zip` file, simply extract it and open your terminal inside the extracted folder. Alternatively, clone the main repository:
     ```bash
     git clone https://github.com/2Megblv/LottoPipeline.git
     cd LottoPipeline
-    git checkout aus-lotto-streamlit
     ```
 
 2.  **Install the Required Dependencies:**
@@ -32,11 +32,11 @@ macOS users often run into "externally-managed-environment" errors when trying t
     brew install python@3.12
     ```
 
-2.  **Clone the Repository:**
+2.  **Get the Code:**
+    If you downloaded the `lotto_australia_deployment.zip` file, extract it and navigate into it using your terminal. Alternatively, clone it:
     ```bash
     git clone https://github.com/2Megblv/LottoPipeline.git
     cd LottoPipeline
-    git checkout aus-lotto-streamlit
     ```
 
 3.  **Create and Activate a Virtual Environment:**
