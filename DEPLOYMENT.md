@@ -14,6 +14,7 @@
     git clone https://github.com/2Megblv/LottoPipeline.git
     cd LottoPipeline
     ```
+    *(Note: If you get a "destination path already exists" error, delete the old folder first using `rm -rf LottoPipeline` or use `git pull` from inside the existing folder).*
 
 2.  **Install the Required Dependencies:**
     Ensure you are using `pip` associated with Python 3.12.
@@ -41,6 +42,7 @@ macOS users often run into "externally-managed-environment" errors when trying t
 2.  **Get the Code:**
     If you downloaded the `lotto_australia_deployment.zip` file, extract it and navigate into it using your terminal. Alternatively, clone it:
     ```bash
+    # If the folder already exists, run `rm -rf LottoPipeline` first!
     git clone https://github.com/2Megblv/LottoPipeline.git
     cd LottoPipeline
     ```
