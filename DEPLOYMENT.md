@@ -19,6 +19,7 @@
     Ensure you are using `pip` associated with Python 3.12.
     ```bash
     python3.12 -m pip install -r requirements.txt
+    python3.12 -m pip install streamlit ephem pandas beautifulsoup4
     ```
 
 3.  **Run the Application:**
@@ -50,9 +51,12 @@ macOS users often run into "externally-managed-environment" errors when trying t
     ```
 
 4.  **Install Dependencies (Using Absolute Paths):**
-    To ensure packages are installed *strictly* into the new environment (and to avoid the "No module named streamlit" error), use the local environment's binary directly:
+    To ensure packages are installed *strictly* into the new environment (and to avoid the "No module named streamlit" error), use the local environment's binary directly.
+
+    *(Note: If you cloned the repository and the branch hasn't updated the requirements file yet, we explicitly force the UI dependencies here to be safe)*:
     ```bash
     ./lotto_env/bin/pip install -r requirements.txt
+    ./lotto_env/bin/pip install streamlit ephem pandas beautifulsoup4
     ```
 
 5.  **Running the Application:**
@@ -64,7 +68,9 @@ macOS users often run into "externally-managed-environment" errors when trying t
 This will automatically open a new tab in your default web browser pointing to `http://localhost:8501`.
 
 ### 🚨 macOS Troubleshooting: "No module named streamlit"
-If you ran the command above and still see `/Users/.../lotto_env/bin/python: No module named streamlit`, it means the installation step failed or was skipped. **Run this exact command to force-install the UI packages directly into your environment:**
+If you ran the command above and still see `/Users/.../lotto_env/bin/python: No module named streamlit`, it means the installation step failed or you cloned an older version of the repository that lacked Streamlit in its requirements.
+
+**Run this exact command to force-install the UI packages directly into your environment:**
 ```bash
 ./lotto_env/bin/python -m pip install streamlit ephem pandas beautifulsoup4
 ```
