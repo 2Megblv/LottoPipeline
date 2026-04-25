@@ -47,10 +47,10 @@ macOS users often run into "externally-managed-environment" errors when trying t
     ```
     *(You will know it worked if your terminal prompt now starts with `(lotto_env)`)*
 
-4.  **Install Dependencies:**
-    Now install the libraries inside your active virtual environment.
+4.  **Install Dependencies (Crucial Step):**
+    You must explicitly use `python -m pip` to guarantee the libraries install *inside* the active `lotto_env`. If you skip this, Streamlit will not be found.
     ```bash
-    pip install -r requirements.txt
+    python -m pip install -r requirements.txt
     ```
 
 ## 4. Running the Application
